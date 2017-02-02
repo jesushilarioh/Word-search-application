@@ -1,6 +1,8 @@
+// Variables
 var animalContainer = document.getElementById('demo');
 var btn = document.getElementById('btn');
 
+// Main function
 function myFunction(){
     var x = document.getElementById("myText").value;
     var ourRequest = new XMLHttpRequest();
@@ -12,6 +14,7 @@ function myFunction(){
     ourRequest.send();
 }
 
+// Secondary functions
 function renderHTML(data) {
     var htmlString = "";
 
