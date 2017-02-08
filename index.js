@@ -10,7 +10,18 @@ function myFunction(){
     ourRequest.onload = function(){
         var ourData = JSON.parse(ourRequest.responseText);
         renderHTML(ourData);
+
+        x.addEventListener("keypress", function() {
+          console.log(ourData[0]);
+          var htmlString = "";
+
+          for (i = 0; i < ourData.length; i++){
+              animalContainer.innerHTML = htmlString += ourData[0];
+          }
+        });
+
     };
+
     ourRequest.send();
 }
 
