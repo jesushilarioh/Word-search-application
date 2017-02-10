@@ -32,8 +32,5 @@ if (data){
   for (i = 0; i < data.length; i++){
       animalContainer.innerHTML = htmlString += '<h3>' + data[i].text + '</h3><p>TAKEN FROM: ' + data[i].attributionText + '.</p>';
   }
-} else {
-  htmlString += "";
 }
-
 }
