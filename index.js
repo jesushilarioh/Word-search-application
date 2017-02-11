@@ -12,10 +12,6 @@ x.addEventListener('keyup', function() {
       var ourData = JSON.parse(ourRequest.responseText);
       renderHTML(ourData);
 
-        console.log('hello');
-        if (x.value === "") {
-          ourData = ourRequest.responseText;
-        }
 
   };
 
@@ -28,9 +24,7 @@ x.addEventListener('keyup', function() {
 // Secondary functions
 function renderHTML(data) {
     var htmlString = "";
-if (data){
   for (i = 0; i < data.length; i++){
       animalContainer.innerHTML = htmlString += '<h3>' + data[i].text + '</h3><p>TAKEN FROM: ' + data[i].attributionText + '.</p>';
   }
-}
 }
