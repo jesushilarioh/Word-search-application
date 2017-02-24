@@ -1,0 +1,15 @@
+#ajaxButton {
+    cursor: pointer;
+}
+#wrongWord {
+  color: red;
+}
+.green {
+  color: green;
+}
+a {
+    display:inline-block;
+    margin-left: 10px;
+    color: black;
+    cursor: pointer;
+}

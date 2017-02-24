@@ -1,30 +1,180 @@
-// Variables
-var animalContainer = document.getElementById('demo');
-var btn = document.getElementById('btn');
-var x = document.getElementById("myText");
+(function() {
+    //"use strict";
+
+    // Global variables
+    var httpRequest;
+    var httpRequest2;
+
+    // Add event listeners to ajaxButton and ajaxTextbox
+    document.getElementById("ajaxButton").addEventListener("click", usersValue);
+    document.getElementById("ajaxTextbox").addEventListener("keyup", usersValue);
+
+    // Recieve value from the user
+    function usersValue() {
+        let word = document.getElementById("ajaxTextbox").value.toLowerCase();
+        makeRequest("http://api.wordnik.com:80/v4/word.json/" + word + "/definitions?limit=5&includeRelated=true&sourceDictionaries=all&useCanonical=false&includeTags=false&api_key=551cd772a6bd0f92b40010e295e0739d0acaf17d08ecc3c9d");
+        makeRequest2("http://api.wordnik.com:80/v4/word.json/" + word + "/relatedWords?useCanonical=true&relationshipTypes=synonym&limitPerRelationshipType=100&api_key=551cd772a6bd0f92b40010e295e0739d0acaf17d08ecc3c9d");
+    }
+
+    //"http://api.wordnik.com/v4/word.json/" + word + "/relatedWords?limit=200&includeRelated…ncludeTags=false&api_key=551cd772a6bd0f92b40010e295e0739d0acaf17d08ecc3c9d"
 
 
-x.addEventListener('keyup', function() {
-  var ourRequest = new XMLHttpRequest();
+    // Request the URL api
+    function makeRequest(url) {
+        httpRequest = new XMLHttpRequest();
 
-  ourRequest.open('GET', 'http://api.wordnik.com:80/v4/word.json/' + x.value + '/definitions?limit=2&includeRelated=true&useCanonical=false&includeTags=false&api_key=a2a73e7b926c924fad7001ca3111acd55af2ffabf50eb4ae5', true);
-  ourRequest.onload = function(){
-      var ourData = JSON.parse(ourRequest.responseText);
-      renderHTML(ourData);
+        if (!httpRequest) {
+            alert('Giving up :[ Cannot create an XMLHTTP instance');
+            return false;
+        }
+        httpRequest.onreadystatechange = requestStatus;
+        httpRequest.open('GET', url);
+        httpRequest.send();
+    }
+
+    function makeRequest2(url) {
+        httpRequest2 = new XMLHttpRequest();
+
+        if (!httpRequest2) {
+            alert('Giving up :[ Cannot create an XMLHTTP instance');
+            return false;
+        }
+        httpRequest2.onreadystatechange = requestStatus2;
+        httpRequest2.open('GET', url);
+        httpRequest2.send();
+    }
+
+    // Methods to take when receiving a response
+    function requestStatus() {
+        const searchedWord = document.getElementById("word"),
+            partOfSpeech = document.getElementById("partOfSpeech"),
+            wordDefinition = document.getElementById("definitions"),
+            source = document.getElementById("source");
+
+        if (httpRequest.readyState === XMLHttpRequest.DONE) {
+            switch (httpRequest.status) {
+                case 200:
+                    const JSONParse = JSON.parse(httpRequest.responseText);
+
+                    if (typeof(JSONParse[0]) === 'undefined') {
+                        searchedWord.innerHTML = "<strong id='wrongWord'>" + document.getElementById("ajaxTextbox").value.toLowerCase();
+                        partOfSpeech.textContent = "...Hmmm... That's an interesting input...";
+                        wordDefinition.textContent = "However, There are no suggestions at this time..."
+                        source.textContent = "Please Try Again.";
+
+                    } else {
+                        searchedWord.className = "green";
+                        searchedWord.textContent = JSONParse[0].word;
+                        partOfSpeech.textContent = JSONParse[0].partOfSpeech;
+                        let string1 = "";
+
+                        for (i = 0; i < JSONParse.length; i++) {
+                            string1 += "<h4>" + JSONParse[i].text + "</h4>" + "<h4><small>" + JSONParse[i].attributionText + "</small></h4>";
+
+                            definitions.innerHTML = string1;
+                        }
+                        source.textContent = "";
+                    }
+                    break;
+                case 400:
+                    emptyAll();
+                    break;
+                case 404:
+                    emptyAll();
+                    break;
+                case 503:
+                    emptyAll();
+                    sorryText();
+                    break;
+                default:
+                    emptyAll();
+                    sorryText();
+            }
+        }
+
+        function emptyAll() {
+            emptyString(searchedWord, true);
+            emptyString(partOfSpeech, true);
+            emptyString(wordDefinition, true);
+            emptyString(source, true);
+        }
+
+        function sorryText() {
+            wordDefinition.textContent = "We're sorry, your request could not be processed at this time. Technical difficulties have occured on our end... please check back soon!";
+        }
+    }
 
 
-  };
+    // Inner api data to index.html
+    function emptyString(usersWord, bool) {
+        if (bool === true) {
+            usersWord.textContent = "";
+        } else {
+            usersWord.className = "";
+        }
+    }
 
-  ourRequest.send();
-});
+
+    function requestStatus2() {
+        const searchedWord = document.getElementById("word"),
+            partOfSpeech = document.getElementById("partOfSpeech"),
+            wordDefinition = document.getElementById("definitions"),
+            source = document.getElementById("source"),
+            typeOfRelation = document.getElementById("typeOfRelation"),
+            relatedWords = document.getElementById("relatedWords");
+
+        if (httpRequest2.readyState === XMLHttpRequest.DONE) {
+            switch (httpRequest2.status) {
+                case 200:
+                    const JSONParse2 = JSON.parse(httpRequest2.responseText);
+
+                    if (typeof(JSONParse2[0]) === 'undefined') {
+                        emptyString(relatedWords, true);
+                        emptyString(typeOfRelation, true);
+                    } else {
+                        let HTMLstring = "";
+
+                        for (i = 0; i < JSONParse2[0].words.length; i++) {
+                            HTMLstring += "<a value='" + JSONParse2[0].words[i] + "' id='"+ JSONParse2[0].words[i] +"'>" + JSONParse2[0].words[i] + "</a>";
+                        }
+
+                        typeOfRelation.textContent = JSONParse2[0].relationshipType;
+                        relatedWords.innerHTML = HTMLstring;
+
+                        // Assign all links to links variables
+                        var links = relatedWords.querySelectorAll("a");
+
+                        // Add an event listenr to each link
+                        for (var i = 0; i < links.length; i++) {
+                            links[i].addEventListener("click", function() {
+
+                                // When click the value will be replaced in input box
+                                document.getElementById("ajaxTextbox").value = this.textContent;
+
+                                usersValue();
+                            });
+                        }
+                    }
+                    break;
+                case 400:
+                    emptyString(relatedWords, true);
+                    emptyString(typeOfRelation, true);
+                    break;
+                case 404:
+                    emptyString(relatedWords, true);
+                    emptyString(typeOfRelation, true);
+                    break;
+                case 503:
+                    emptyString(relatedWords, true);
+                    emptyString(typeOfRelation, true);
+                    break;
+                default:
+                    emptyString(relatedWords, true);
+                    emptyString(typeOfRelation, true);
+            }
+        }
+    }
 
 
 
-
-// Secondary functions
-function renderHTML(data) {
-    var htmlString = "";
-  for (i = 0; i < data.length; i++){
-      animalContainer.innerHTML = htmlString += '<h3>' + data[i].text + '</h3><p>TAKEN FROM: ' + data[i].attributionText + '.</p>';
-  }
-}
+})();
