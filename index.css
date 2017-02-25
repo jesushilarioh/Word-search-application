@@ -2,14 +2,45 @@
     cursor: pointer;
 }
 #wrongWord {
-  color: red;
+    color: rgb(255, 80, 80);
 }
 .green {
-  color: green;
+    color: rgb(169, 255, 139);
 }
 a {
     display:inline-block;
     margin-left: 10px;
-    color: black;
+    color: rgb(27, 47, 116);
+    text-shadow: 1px 1px 2px white;
     cursor: pointer;
+}
+body {
+    background-image: url('words.jpeg');
+    background-repeat: repeat;
+    background-attachment: fixed;
+    background-position: center;
+    background-color: rgb(21, 29, 77);
+}
+#word {
+    font-size: 45px;
+}
+#source{
+    color: rgb(0, 1, 32);
+    text-shadow: 1px 1px 4px white;
+}
+#relatedWords {
+    font-size: 30px;
+}
+.jumbotron {
+    padding-top: 70px;
+    background-color: rgba(91, 90, 126, .7);
+}
+.well {
+    background-color: rgba(115, 112, 96, .7);
+    color: white;
+    text-shadow: 2px 2px 4px black;
+    border: none;
+}
+#partOfSpeech, #typeOfRelation {
+    font-size: 40px;
 }

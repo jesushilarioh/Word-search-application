@@ -49,19 +49,21 @@
         const searchedWord = document.getElementById("word"),
             partOfSpeech = document.getElementById("partOfSpeech"),
             wordDefinition = document.getElementById("definitions"),
-            source = document.getElementById("source");
+            source = document.getElementById("source"),
+            rowLeft = document.getElementById("rowLeft");
+            rightLeft = document.getElementById("rowRight");
 
         if (httpRequest.readyState === XMLHttpRequest.DONE) {
             switch (httpRequest.status) {
                 case 200:
                     const JSONParse = JSON.parse(httpRequest.responseText);
+                    rowLeft.className = "well";
 
                     if (typeof(JSONParse[0]) === 'undefined') {
                         searchedWord.innerHTML = "<strong id='wrongWord'>" + document.getElementById("ajaxTextbox").value.toLowerCase();
                         partOfSpeech.textContent = "...Hmmm... That's an interesting input...";
                         wordDefinition.textContent = "However, There are no suggestions at this time..."
                         source.textContent = "Please Try Again.";
-
                     } else {
                         searchedWord.className = "green";
                         searchedWord.textContent = JSONParse[0].word;
@@ -69,7 +71,7 @@
                         let string1 = "";
 
                         for (i = 0; i < JSONParse.length; i++) {
-                            string1 += "<h4>" + JSONParse[i].text + "</h4>" + "<h4><small>" + JSONParse[i].attributionText + "</small></h4>";
+                            string1 += "<h4 id='definitions2'>" + JSONParse[i].text + "</h4>" + "<h4><small id='source'>" + JSONParse[i].attributionText + "</small></h4>";
 
                             definitions.innerHTML = string1;
                         }
@@ -77,16 +79,20 @@
                     }
                     break;
                 case 400:
+                    rowLeft.className = "";
                     emptyAll();
                     break;
                 case 404:
+                    rowLeft.className = "";
                     emptyAll();
                     break;
                 case 503:
+                    rowLeft.className = "well";
                     emptyAll();
                     sorryText();
                     break;
                 default:
+                    rowLeft.className = "well";
                     emptyAll();
                     sorryText();
             }
@@ -129,16 +135,18 @@
                     const JSONParse2 = JSON.parse(httpRequest2.responseText);
 
                     if (typeof(JSONParse2[0]) === 'undefined') {
+                        rowRight.className = "";
                         emptyString(relatedWords, true);
                         emptyString(typeOfRelation, true);
                     } else {
+                        rowRight.className = "well";
                         let HTMLstring = "";
 
                         for (i = 0; i < JSONParse2[0].words.length; i++) {
                             HTMLstring += "<a value='" + JSONParse2[0].words[i] + "' id='"+ JSONParse2[0].words[i] +"'>" + JSONParse2[0].words[i] + "</a>";
                         }
 
-                        typeOfRelation.textContent = JSONParse2[0].relationshipType;
+                        typeOfRelation.textContent = JSONParse2[0].relationshipType + "s";
                         relatedWords.innerHTML = HTMLstring;
 
                         // Assign all links to links variables
@@ -157,18 +165,22 @@
                     }
                     break;
                 case 400:
+                    rowRight.className = "";
                     emptyString(relatedWords, true);
                     emptyString(typeOfRelation, true);
                     break;
                 case 404:
+                    rowRight.className = "";
                     emptyString(relatedWords, true);
                     emptyString(typeOfRelation, true);
                     break;
                 case 503:
+                    rowRight.className = "";
                     emptyString(relatedWords, true);
                     emptyString(typeOfRelation, true);
                     break;
                 default:
+                    rowRight.className = "";
                     emptyString(relatedWords, true);
                     emptyString(typeOfRelation, true);
             }
