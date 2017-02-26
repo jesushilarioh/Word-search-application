@@ -106,7 +106,8 @@
         }
 
         function sorryText() {
-            wordDefinition.textContent = "We're sorry, your request could not be processed at this time. Technical difficulties have occured on our end... please check back soon!";
+            const sorry = "We're sorry, your request could not be processed at this time. Technical difficulties have occured on our end... please check back soon!";
+            wordDefinition.textContent = sorry;
         }
     }
 
@@ -119,7 +120,6 @@
             usersWord.className = "";
         }
     }
-
 
     function requestStatus2() {
         const searchedWord = document.getElementById("word"),
@@ -186,7 +186,4 @@
             }
         }
     }
-
-
-
 })();
