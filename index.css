@@ -1,11 +1,9 @@
-#ajaxButton {
-    cursor: pointer;
-}
-#wrongWord {
-    color: rgb(255, 80, 80);
-}
-.green {
-    color: rgb(169, 255, 139);
+body {
+    background-image: url('words.jpeg');
+    background-repeat: repeat;
+    background-attachment: fixed;
+    background-position: center;
+    background-color: rgb(21, 29, 77);
 }
 a {
     display:inline-block;
@@ -14,12 +12,12 @@ a {
     text-shadow: 1px 1px 2px white;
     cursor: pointer;
 }
-body {
-    background-image: url('words.jpeg');
-    background-repeat: repeat;
-    background-attachment: fixed;
-    background-position: center;
-    background-color: rgb(21, 29, 77);
+
+#ajaxButton {
+    cursor: pointer;
+}
+#wrongWord {
+    color: rgb(255, 80, 80);
 }
 #word {
     font-size: 45px;
@@ -31,6 +29,11 @@ body {
 #relatedWords {
     font-size: 30px;
 }
+
+#partOfSpeech, #typeOfRelation {
+    font-size: 40px;
+}
+
 .jumbotron {
     padding-top: 70px;
     background-color: rgba(91, 90, 126, .7);
@@ -41,6 +44,6 @@ body {
     text-shadow: 2px 2px 4px black;
     border: none;
 }
-#partOfSpeech, #typeOfRelation {
-    font-size: 40px;
+.green {
+    color: rgb(169, 255, 139);
 }
