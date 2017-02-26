@@ -24,7 +24,7 @@ body {
 #word {
     font-size: 45px;
 }
-#source{
+#source, #source2{
     color: rgb(0, 1, 32);
     text-shadow: 1px 1px 4px white;
 }

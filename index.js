@@ -71,7 +71,7 @@
                         let string1 = "";
 
                         for (i = 0; i < JSONParse.length; i++) {
-                            string1 += "<h4 id='definitions2'>" + JSONParse[i].text + "</h4>" + "<h4><small id='source'>" + JSONParse[i].attributionText + "</small></h4>";
+                            string1 += "<h4 id='definitions2'>" + JSONParse[i].text + "</h4>" + "<h4><small id='source2'>" + JSONParse[i].attributionText + "</small></h4>";
 
                             definitions.innerHTML = string1;
                         }
