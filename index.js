@@ -59,10 +59,10 @@
             rowLeft = document.getElementById("rowLeft");
         rightLeft = document.getElementById("rowRight");
 
-        if (httpRequest.readyState === XMLHttpRequest.DONE) {
-            switch (httpRequest.status) {
+        if (this.readyState === XMLHttpRequest.DONE) {
+            switch (this.status) {
                 case 200:
-                    const JSONParse = JSON.parse(httpRequest.responseText);
+                    const JSONParse = JSON.parse(this.responseText);
                     rowLeft.className = "well";
 
                     if (typeof(JSONParse[0]) === 'undefined') {
@@ -135,10 +135,10 @@
             typeOfRelation = document.getElementById("typeOfRelation"),
             relatedWords = document.getElementById("relatedWords");
 
-        if (httpRequest2.readyState === XMLHttpRequest.DONE) {
-            switch (httpRequest2.status) {
+        if (this.readyState === XMLHttpRequest.DONE) {
+            switch (this.status) {
                 case 200:
-                    const JSONParse2 = JSON.parse(httpRequest2.responseText);
+                    const JSONParse2 = JSON.parse(this.responseText);
 
                     if (typeof(JSONParse2[0]) === 'undefined') {
                         rowRight.className = "";
