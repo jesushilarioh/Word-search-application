@@ -12,22 +12,29 @@
 
     <body>
         <div class="container">
+                <div class="row" id="mainTitle">
+                    <div class="col-md-12">
+                        <h2 >Word Search Dictionary</h2>
+                    </div>
+                </div>
+                <div class="row" id="input">
+                    <div class="col-md-12">
+                        <div class="input-group input-group-lg">
+                          <input type="text" class="form-control" placeholder="type in a word..." id="ajaxTextbox" value="";>
+                          <span class="input-group-btn">
+                                <button type="button" class="btn btn-default" id="ajaxButton">
+                                    <span class="glyphicon glyphicon-search"></span>
+                                </button>
+                          </span>
+                        </div><!-- /input-group -->
+                    </div>
+                </div>
 
-            <div class="jumbotron">
 
-                <div class="input-group input-group-lg">
-                  <input type="text" class="form-control" placeholder="type in a word..." id="ajaxTextbox" value="";>
-                  <span class="input-group-btn">
-                        <button type="button" class="btn btn-default" id="ajaxButton">
-                            <span class="glyphicon glyphicon-search"></span>
-                        </button>
-                  </span>
-                </div><!-- /input-group -->
-
-            </div><!-- /jumbotron -->
 
             <div class="row" >
                 <h1 id="top"></h1>
+
                 <div class="col-sm-6">
                     <div class="" id="rowLeft">
                         <h1 id="word"></h1>
@@ -35,17 +42,22 @@
                         <h4 id="definitions"></h4>
                         <h4 id="source"><small ></small></h4>
                     </div>
-
                 </div>
 
                 <div class="col-sm-6">
                     <div class="" id="rowRight">
                         <h3 id="typeOfRelation"></h3>
-                        <h4 id="relatedWords"></h4>
+                        <h4 id="relatedWords" class="synLink"></h4>
                     </div>
                 </div>
-
             </div>
+
+            <!-- footer -->
+            <div class="row">
+                <div class="footer col-md-12">Created by: <strong><a class="footer" href="http://www.twitter.com/jesushilarioh/" target="_blank">Jesus Hilario Hernandez</a></strong>.
+                </div>
+            </div>
+            <!-- /footer -->
 
         </div><!-- /contatiner -->
 

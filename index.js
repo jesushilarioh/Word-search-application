@@ -149,7 +149,7 @@
                         let HTMLstring = "";
 
                         for (i = 0; i < JSONParse2[0].words.length; i++) {
-                            HTMLstring += "<a value='" + JSONParse2[0].words[i] + "' id='" + JSONParse2[0].words[i] + "'>" + JSONParse2[0].words[i] + "</a>";
+                            HTMLstring += "<a class='synLink' value='" + JSONParse2[0].words[i] + "' id='" + JSONParse2[0].words[i] + "'>" + JSONParse2[0].words[i] + "</a>";
                         }
 
                         typeOfRelation.textContent = JSONParse2[0].relationshipType + "s";

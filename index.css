@@ -5,14 +5,17 @@ body {
     background-position: center;
     background-color: rgb(21, 29, 77);
 }
-a {
-    display:inline-block;
-    margin-left: 10px;
-    color: rgb(27, 47, 116);
-    text-shadow: 1px 1px 2px white;
-    cursor: pointer;
+#mainTitle {
+    text-align: right;
+    color: white;
+    text-shadow: 2px 3px 3px black;
+    padding: 0 0 15px 0;
 }
-
+#mainSubTitle {
+    text-align: left;
+    text-shadow: 1px 1px 2px white;
+    font-style: oblique;
+}
 #ajaxButton {
     cursor: pointer;
 }
@@ -23,8 +26,8 @@ a {
     font-size: 45px;
 }
 #source, #source2{
-    color: rgb(0, 1, 32);
-    text-shadow: 1px 1px 4px white;
+    color: rgb(181, 181, 181);
+    text-shadow: 1px 1px 2px black;
 }
 #relatedWords {
     font-size: 30px;
@@ -32,18 +35,41 @@ a {
 
 #partOfSpeech, #typeOfRelation {
     font-size: 40px;
+    color: rgb(147, 147, 147);
+    text-shadow: 1px 1px 1px black;
+    text-align: left;
 }
+#typeOfRelation {
 
+}
+#input {
+    padding-bottom: 40px;
+}
 .jumbotron {
-    padding-top: 70px;
-    background-color: rgba(91, 90, 126, .7);
+    background-color: rgba(91, 90, 126, .0);
 }
 .well {
-    background-color: rgba(115, 112, 96, .7);
+    background-color: rgba(0, 0, 0, .7);
     color: white;
     text-shadow: 2px 2px 4px black;
     border: none;
 }
 .green {
     color: rgb(169, 255, 139);
+}
+.footer {
+    text-align: right;
+    padding: 100px 20px 20px 20px;
+    color: white;
+    text-shadow: 1px 1px 1px black;
+}
+.synLink {
+    display:inline-block;
+    margin-left: 10px;
+    text-shadow: 2px 2px 2px black;
+    cursor: pointer;
+    color: white;
+}
+.synLink:hover {
+    color: green;
 }
