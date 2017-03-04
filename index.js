@@ -22,6 +22,9 @@
         makeRequest2(synonymURL);
     }
 
+    //"http://api.wordnik.com/v4/word.json/" + word + "/relatedWords?limit=200&includeRelated…ncludeTags=false&api_key=551cd772a6bd0f92b40010e295e0739d0acaf17d08ecc3c9d"
+
+
     // Request the URL api
     function makeRequest(url) {
         httpRequest = new XMLHttpRequest();
@@ -113,6 +116,7 @@
             wordDefinition.textContent = sorry;
         }
     }
+
 
     // Inner api data to index.html
     function emptyString(usersWord, bool) {
