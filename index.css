@@ -32,15 +32,11 @@ body {
 #relatedWords {
     font-size: 30px;
 }
-
 #partOfSpeech, #typeOfRelation {
     font-size: 40px;
     color: rgb(147, 147, 147);
     text-shadow: 1px 1px 1px black;
     text-align: left;
-}
-#typeOfRelation {
-
 }
 #input {
     padding-bottom: 40px;
