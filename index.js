@@ -25,7 +25,7 @@
     //"http://api.wordnik.com/v4/word.json/" + word + "/relatedWords?limit=200&includeRelated…ncludeTags=false&api_key=551cd772a6bd0f92b40010e295e0739d0acaf17d08ecc3c9d"
 
 
-    // Request the URL api
+    // Request the URL api definitions
     function makeRequest(url) {
         httpRequest = new XMLHttpRequest();
 
@@ -38,6 +38,7 @@
         httpRequest.send();
     }
 
+    // Request the URL api  synonyms
     function makeRequest2(url) {
         httpRequest2 = new XMLHttpRequest();
 
@@ -107,6 +108,7 @@
             }
         }
 
+        
         function emptyAll() {
             emptyString(searchedWord, true);
             emptyString(partOfSpeech, true);
