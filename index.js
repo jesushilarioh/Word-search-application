@@ -108,7 +108,7 @@
             }
         }
 
-        
+
         function emptyAll() {
             emptyString(searchedWord, true);
             emptyString(partOfSpeech, true);
