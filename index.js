@@ -25,7 +25,7 @@
     //"http://api.wordnik.com/v4/word.json/" + word + "/relatedWords?limit=200&includeRelated…ncludeTags=false&api_key=551cd772a6bd0f92b40010e295e0739d0acaf17d08ecc3c9d"
 
 
-    // Request the URL api
+    // Request the URL api definitions
     function makeRequest(url) {
         httpRequest = new XMLHttpRequest();
 
@@ -38,6 +38,7 @@
         httpRequest.send();
     }
 
+    // Request the URL api  synonyms
     function makeRequest2(url) {
         httpRequest2 = new XMLHttpRequest();
 
@@ -57,13 +58,14 @@
             wordDefinition = document.getElementById("definitions"),
             source = document.getElementById("source"),
             rowLeft = document.getElementById("rowLeft");
-        rightLeft = document.getElementById("rowRight");
+
 
         if (this.readyState === XMLHttpRequest.DONE) {
             switch (this.status) {
                 case 200:
                     const JSONParse = JSON.parse(this.responseText);
                     rowLeft.className = "well";
+                    styleWells(rowLeft);
 
                     if (typeof(JSONParse[0]) === 'undefined') {
                         searchedWord.innerHTML = "<strong id='wrongWord'>" + document.getElementById("ajaxTextbox").value.toLowerCase();
@@ -94,16 +96,19 @@
                     break;
                 case 503:
                     rowLeft.className = "well";
+                    styleWells(rowLeft);
                     emptyAll();
                     sorryText();
                     break;
                 default:
                     rowLeft.className = "well";
+                    styleWells(rowLeft);
                     emptyAll();
                     sorryText();
             }
         }
 
+        
         function emptyAll() {
             emptyString(searchedWord, true);
             emptyString(partOfSpeech, true);
@@ -133,7 +138,8 @@
             wordDefinition = document.getElementById("definitions"),
             source = document.getElementById("source"),
             typeOfRelation = document.getElementById("typeOfRelation"),
-            relatedWords = document.getElementById("relatedWords");
+            relatedWords = document.getElementById("relatedWords"),
+            rightRight = document.getElementById("rowRight");
 
         if (this.readyState === XMLHttpRequest.DONE) {
             switch (this.status) {
@@ -142,10 +148,12 @@
 
                     if (typeof(JSONParse2[0]) === 'undefined') {
                         rowRight.className = "";
+                        unStyleWells(rowRight);
                         emptyString(relatedWords, true);
                         emptyString(typeOfRelation, true);
                     } else {
                         rowRight.className = "well";
+                        styleWells(rowRight);
                         let HTMLstring = "";
 
                         for (i = 0; i < JSONParse2[0].words.length; i++) {
@@ -191,5 +199,19 @@
                     emptyString(typeOfRelation, true);
             }
         }
+    }
+
+    function styleWells(row) {
+        row.style.backgroundColor = "rgba(0, 0, 0, .7)";
+        row.style.color = "white";
+        row.style.textShadow = "2px 2px 4px black";
+        row.style.border = "none";
+    }
+
+    function unStyleWells(row) {
+        row.style.backgroundColor = "";
+        row.style.color = "";
+        row.style.textShadow = "";
+        row.style.border = "";
     }
 })();
